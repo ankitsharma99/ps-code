@@ -1,3 +1,4 @@
+package firstquestion.staticblock;
 
 public class StaticBlockExample {
 
@@ -6,14 +7,6 @@ public class StaticBlockExample {
 
         new StaticClass();
     }
-}
 
-class StaticClass {
-    static {
-        System.out.println("printing from static block");
-    }
 
-    StaticClass() {
-        System.out.println("Static class Constructor");
-    }
 }

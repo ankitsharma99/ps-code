@@ -1,8 +1,10 @@
+package fourthquestion;
+
 
 public class ClassLoadingExample {
     public static void main(String[] args) {
         try {
-            Class myClass = Class.forName("LoadClass");
+            Class myClass = Class.forName("fourthquestion.LoadClass");
             Object obj = myClass.getDeclaredConstructor().newInstance();
 
             ((LoadClass)obj).printSomething();
@@ -10,11 +12,5 @@ public class ClassLoadingExample {
         catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-}
-
-class LoadClass {
-    public void printSomething() {
-        System.out.println("LoadClass printed");
     }
 }

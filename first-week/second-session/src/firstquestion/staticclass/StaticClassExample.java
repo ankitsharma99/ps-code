@@ -1,3 +1,4 @@
+package firstquestion.staticclass;
 
 public class StaticClassExample {
 
