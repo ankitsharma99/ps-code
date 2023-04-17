@@ -23,44 +23,46 @@ class Task implements Runnable {
     }
 }
 public class AllExecutorImplementation {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
         // will run in the same order
         singleThreadExecutor.execute(new Task("SingleThreadExecutor task 1"));
         singleThreadExecutor.execute(new Task("SingleThreadExecutor task 2"));
-        singleThreadExecutor.shutdown();
-
-
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(2);
-        fixedThreadPool.execute(new Task("FixedThreadPool Task 1"));
-        fixedThreadPool.execute(new Task("FixedThreadPool Task 2"));
-        fixedThreadPool.execute(new Task("FixedThreadPool Task 3"));        // this will wait until line 37 or 38 thread executes
-        fixedThreadPool.shutdown();
-
-
-        ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-        cachedThreadPool.execute(new Task("CachedThreadPool Task 1"));
-        cachedThreadPool.execute(new Task("CachedThreadPool Task 2"));
-        cachedThreadPool.execute(new Task("CachedThreadPool Task 3"));
-        cachedThreadPool.shutdown();
-
-
-        ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(2);
-        // can run after some delay or executes periodically, returns a ScheduledFuture
-        ScheduledFuture<?> scheduledFuture = scheduledThreadPool.schedule(new Task("ScheduledThreadPool Task 1"), 5, TimeUnit.SECONDS);
-        scheduledThreadPool.schedule(new Task("ScheduledThreadPool Task 2"), 3, TimeUnit.SECONDS);
-
-        scheduledThreadPool.scheduleAtFixedRate(new Task("FixedScheduledThreadPool Task 3"), 1, 1, TimeUnit.SECONDS);
-        scheduledThreadPool.scheduleAtFixedRate(new Task("FixedScheduledThreadPool Task 4"), 2, 2, TimeUnit.SECONDS);
-
-        try {
-            scheduledFuture.get();
+//        singleThreadExecutor.shutdown();
+        if(!singleThreadExecutor.awaitTermination(3, TimeUnit.SECONDS)) {
+            singleThreadExecutor.shutdownNow();
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        scheduledThreadPool.shutdown();
+
+//        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(2);
+//        fixedThreadPool.execute(new Task("FixedThreadPool Task 1"));
+//        fixedThreadPool.execute(new Task("FixedThreadPool Task 2"));
+//        fixedThreadPool.execute(new Task("FixedThreadPool Task 3"));        // this will wait until line 37 or 38 thread executes
+//        fixedThreadPool.shutdown();
+//
+//
+//        ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+//        cachedThreadPool.execute(new Task("CachedThreadPool Task 1"));
+//        cachedThreadPool.execute(new Task("CachedThreadPool Task 2"));
+//        cachedThreadPool.execute(new Task("CachedThreadPool Task 3"));
+//        cachedThreadPool.shutdown();
+//
+//
+//        ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(2);
+//        // can run after some delay or executes periodically, returns a ScheduledFuture
+//        ScheduledFuture<?> scheduledFuture = scheduledThreadPool.schedule(new Task("ScheduledThreadPool Task 1"), 5, TimeUnit.SECONDS);
+//        scheduledThreadPool.schedule(new Task("ScheduledThreadPool Task 2"), 3, TimeUnit.SECONDS);
+//
+//        scheduledThreadPool.scheduleAtFixedRate(new Task("FixedScheduledThreadPool Task 3"), 1, 1, TimeUnit.SECONDS);
+//        scheduledThreadPool.scheduleAtFixedRate(new Task("FixedScheduledThreadPool Task 4"), 2, 2, TimeUnit.SECONDS);
+//
+//        try {
+//            scheduledFuture.get();
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        scheduledThreadPool.shutdown();
 
     }
 }
