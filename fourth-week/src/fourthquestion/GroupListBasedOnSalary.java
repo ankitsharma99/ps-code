@@ -4,6 +4,7 @@ package fourthquestion;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 class Employee {
@@ -61,8 +62,8 @@ public class GroupListBasedOnSalary {
         employees.add(new Employee(7, "Rahane", 50));
         employees.add(new Employee(8, "Gaikwad", 100));
 
-        Map<Double, List<Employee>> employeeMap = employees.stream()
-                .collect(Collectors.groupingBy(Employee::getSalary));
+        Map<Double, List<String>> employeeMap = employees.stream()
+                .collect(Collectors.groupingBy(Employee::getSalary, Collectors.mapping(Employee::getName, Collectors.toList())));
 
         System.out.println(employeeMap);
     }
