@@ -4,6 +4,8 @@ package fourthquestion;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -52,6 +54,23 @@ class Employee {
     }
 }
 
+class GetSalary implements Function<Employee, Double> {
+    public Double apply(Employee e) {
+        return e.getSalary();
+    }
+}
+
+class GetName implements Function<Employee, String> {
+    public String apply(Employee e) {
+        return e.getName();
+    }
+}
+
+class PrintName implements Consumer<String> {
+    public void accept(String name) {
+        System.out.println(name);
+    }
+}
 public class GroupListBasedOnSalary {
     public static void main(String[] args) {
         List<Employee> employees = new ArrayList<>();
@@ -62,9 +81,22 @@ public class GroupListBasedOnSalary {
         employees.add(new Employee(7, "Rahane", 50));
         employees.add(new Employee(8, "Gaikwad", 100));
 
-        Map<Double, List<String>> employeeMap = employees.stream()
-                .collect(Collectors.groupingBy(Employee::getSalary, Collectors.mapping(Employee::getName, Collectors.toList())));
+//        Map<Double, List<String>> employeeMap = employees.stream()
+//                .collect(Collectors.groupingBy(Employee::getSalary, Collectors.mapping(Employee::getName, Collectors.toList())));
+//
+//        System.out.println(employeeMap);
 
-        System.out.println(employeeMap);
+        employees.stream()
+                .collect(Collectors
+                        .groupingBy(new GetSalary(),
+                                Collectors.mapping(new GetName(),
+                                        Collectors.toList()
+                                )
+                        )
+                )
+                .forEach((salary, name) -> {
+                    System.out.println(salary + ": ");
+                    name.forEach(new PrintName());
+                });
     }
 }

@@ -50,6 +50,12 @@ class Employee {
     }
 }
 public class SortEmployeeObjectsBySalary {
+
+    static class CompareBySalary implements Comparator<Employee> {
+        public int compare(Employee o1, Employee o2) {
+            return (int) (o1.getSalary() - o2.getSalary());
+        }
+    }
     public static void main(String[] args) {
         List<Employee> employees = new ArrayList<>();
         employees.add(new Employee(1, "Rahul", 50));
@@ -58,7 +64,7 @@ public class SortEmployeeObjectsBySalary {
         employees.add(new Employee(4, "Pant", 30));
         employees.add(new Employee(5, "Ashwin", 45));
 
-        List<Employee> sorted = employees.stream().sorted((o1, o2) -> (int) (o1.getSalary() - o2.getSalary())).collect(Collectors.toList());
+        List<Employee> sorted = employees.stream().sorted(new CompareBySalary()).collect(Collectors.toList());
 
         System.out.println(sorted);
     }
