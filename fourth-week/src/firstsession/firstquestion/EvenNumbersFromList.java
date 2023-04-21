@@ -1,4 +1,4 @@
-package firstquestion;
+package firstsession.firstquestion;
 
 import java.util.ArrayList;
 import java.util.Arrays;

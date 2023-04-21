@@ -1,4 +1,4 @@
-package secondquestion;
+package firstsession.secondquestion;
 
 //How to find duplicate elements in a given integers list in java using Stream functions?
 

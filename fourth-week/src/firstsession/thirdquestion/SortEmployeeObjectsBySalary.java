@@ -1,4 +1,4 @@
-package thirdquestion;
+package firstsession.thirdquestion;
 
 import java.util.ArrayList;
 import java.util.Comparator;
