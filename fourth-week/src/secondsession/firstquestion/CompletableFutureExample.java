@@ -15,8 +15,8 @@ public class CompletableFutureExample {
             future.complete("Hello, world!");
         }).start();
 
-        future.thenAccept(System.out::println);
+        future.thenAccept(e-> System.out.println(e));
 
-        System.out.println("Program is still running...");
+        System.out.println("Program is running...");
     }
 }
