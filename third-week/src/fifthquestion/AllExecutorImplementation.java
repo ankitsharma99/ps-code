@@ -30,7 +30,7 @@ public class AllExecutorImplementation {
         singleThreadExecutor.execute(new Task("SingleThreadExecutor task 1"));
         singleThreadExecutor.execute(new Task("SingleThreadExecutor task 2"));
 //        singleThreadExecutor.shutdown();
-        if(!singleThreadExecutor.awaitTermination(3, TimeUnit.SECONDS)) {
+        if(!singleThreadExecutor.awaitTermination(120, TimeUnit.SECONDS)) {
             singleThreadExecutor.shutdownNow();
         }
 

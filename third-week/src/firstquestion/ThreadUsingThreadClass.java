@@ -10,7 +10,7 @@ class DownloadManager extends Thread {
     public void run() {
         System.out.println("Downloading file with url: " + fileUrl);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
