@@ -4,7 +4,7 @@ package firstsession.solidprinciples;
 
 // High-level module
 class VideoPlayer {
-    private final Video video;
+    private Video video;
 
     public VideoPlayer(Video video) {
         this.video = video;
@@ -38,10 +38,16 @@ interface Video {
 
 
 public class DependencyInversion {
-    public static void main(String[] args) {
+    static  {
+    }
+    public static synchronized void main(String[] args) {
         Video aviVideo = new AviVideo();
         VideoPlayer videoPlayer = new VideoPlayer(aviVideo);
         videoPlayer.play();
+
+        Video mp4Video = new Mp4Video();
+        VideoPlayer videoPlayer1 = new VideoPlayer(mp4Video);
+        videoPlayer1.play();
 
     }
 }

@@ -28,16 +28,24 @@ public class AllDuplicatesUsingStream {
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 4, 4, 5, 6, 5, 7, 1, 8, 8));
 
-        Map<Integer, Long> counts = list.stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+//        Map<Integer, Long> counts = list.stream()
+//                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
 
         // use objects with filter() and map()
-        Predicate<Map.Entry<Integer, Long>> countGreaterThanOne = new CountGreaterThan(1);
-        Function<Map.Entry<Integer, Long>, Integer> getKey = new GetKey();
+//        Predicate<Map.Entry<Integer, Long>> countGreaterThanOne = new CountGreaterThan(1);
+//        Function<Map.Entry<Integer, Long>, Integer> getKey = new GetKey();
+//
+//        counts.entrySet().stream()
+//                .filter(countGreaterThanOne)
+//                .map(getKey)
+//                .collect(Collectors.toList()).forEach(System.out::println);
+
+        Map<Integer, Long> counts = list.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         counts.entrySet().stream()
-                .filter(countGreaterThanOne)
-                .map(getKey)
+                .filter(count -> count.getValue() > 1)
+                .map(count -> count.getKey())
                 .collect(Collectors.toList()).forEach(System.out::println);
     }
 }

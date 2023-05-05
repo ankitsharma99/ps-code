@@ -84,17 +84,17 @@ public class GroupListBasedOnSalary {
 //
 //        System.out.println(employeeMap);
 
-        employees.stream()
-                .collect(Collectors
-                        .groupingBy(new GetSalary(),
-                                Collectors.mapping(new GetName(),
-                                        Collectors.toList()
+        employees.stream().collect(
+                        Collectors.groupingBy(
+                                Employee::getSalary,
+                                Collectors.mapping(Employee::getName, Collectors.toList()
                                 )
                         )
                 )
                 .forEach((salary, name) -> {
-                    System.out.println(salary + ": ");
+                    System.out.print(salary + ": ");
                     name.forEach(new PrintName());
+                    System.out.println();
                 });
     }
 }

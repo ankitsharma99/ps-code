@@ -13,7 +13,7 @@ public class SemaphoreExample {
                 System.out.println("Thread 1 acquired the semaphore!");
                 Thread.sleep(5000);
                 semaphore.release(); // Release the semaphore (i.e., make it available to another thread)
-                System.out.println("Thread 1 released the semaphore!");
+                System.out.println("Thread 1 released t.he semaphore!");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
